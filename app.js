@@ -9,6 +9,10 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var comments = require('./routes/api/comments');
 
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackConfig = require('./config/webpack.config');
+
 var app = express();
 
 // view engine setup
@@ -26,6 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api/comments', comments);
+
+// webpack setup
+var compiler = webpack(webpackConfig);
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: true, publicPath: webpackConfig.output.publicPath
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
