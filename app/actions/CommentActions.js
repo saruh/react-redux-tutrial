@@ -31,3 +31,38 @@ export function searchComments() {
     });
   };
 }
+
+export function addComment(comment) {
+  return {
+    type: ActionTypes.ADD_COMMENT,
+    comment
+  };
+}
+
+export function createComment(comment) {
+  return dispatch => {
+    // 先にクライアント側だけでstateを更新
+    dispatch(addComment(comment));
+    let promise = new Promise((resolve, reject) => {
+      $.ajax({
+        url: '/api/comments',
+        dataType: 'json',
+        type: 'POST',
+        data: comment,
+        success(data) {
+          resolve(data);
+        },
+        error(xhr, status, err) {
+          reject(err);
+        }
+      });
+    });
+
+    promise.then((data) => {
+      // 再度サーバからのレスポンスで更新し直す
+      dispatch(recieveComments(data));
+    }).catch((err) => {
+      console.error(err);
+    });
+  };
+}
