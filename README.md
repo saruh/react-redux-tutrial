@@ -50,6 +50,47 @@ block content
   script(type='text/babel', src='/javascripts/example.js')
   script(type='text/babel').      <--- ここ！！
 ```
+
+## まとめ
 - Reactの独自仕様
     - [getInitialState](http://js.studio-kingdom.com/react/component_specs/get_initial_state)
     - [componentDidMount](http://js.studio-kingdom.com/react/component_lifecycle/mounting_componentdidmount)
+- Reduxの構成
+    - actions
+        - API通信やビジネスロジックなどのロジックを配置
+    - components
+        - Component(構成部品) を配置
+            - Reactコンポーネント
+            - CSS Modulesで使用するsassのファイル
+        - [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.dfgmuceav)などの設計議論をふまえて、このフォルダ配下はActionを発行せず下記のみにフォーカスする
+            - "受け取ったpropsからの描画"
+            - "ユーザ入力を受け付ける"
+    - constants
+        - Action と Reducer の const を配置
+        - 定石ではないかも
+        - [参考サイト](http://qiita.com/ogomr/items/493e10c424e9d6bd2028)
+    - containers
+        - Reactコンポーネント
+        - components配下とは逆に極力画面要素の描画はさける
+        - "components配下で発生したイベントのハンドリング" -> "Actionのコール" に専念
+    - entries
+        - ルーティングに関して記述されたファイルを配置
+        - 定石ではないかも
+        - [参考サイト](http://qiita.com/shimpeiws/items/df31e2d70cc67c68115d)
+    - lib/records
+        - immutable.jsのRecord型を使い、独自にモデルクラスを作成
+        - 定石ではないかも
+        - [参考サイト](http://qiita.com/shimpeiws/items/df31e2d70cc67c68115d)
+    - reducers
+        - ReduxのReducersにあたる部分です。実際にStateを更新します。
+        - Action に応じてアプリケーションの状態を変更する機構が設置される。
+    - store
+        - アプリケーションの状態を保持する機構と状態を更新する機構が設置される。
+    - utils
+        - DevTools などが設置される。
+        - 定石ではないかも
+        - [参考サイト](http://qiita.com/ogomr/items/493e10c424e9d6bd2028)
+- Middlewareについて
+    - [参考](https://hogehuga.com/post-1123/)
+- Reducersについて
+    - [参考](http://yukidarake.hateblo.jp/entry/2015/09/30/195932)
