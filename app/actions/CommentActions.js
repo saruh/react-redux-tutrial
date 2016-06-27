@@ -23,6 +23,7 @@ export function searchComments() {
 }
 
 export function createComment(comment) {
+  console.log('[action][socket.id]', socket.id);
   return dispatch => {
     socket.emit('create comment', comment);
   };

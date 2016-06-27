@@ -1,5 +1,10 @@
 ## 参考
 - [Qiita : React Tutorial Example](http://qiita.com/ogomr/items/493e10c424e9d6bd2028)
+    - React, Reduxの双方に対して知識がない場合は効率よく覚えられる。
+    - 不要な記述がある
+    - 不具合が出る
+    - babelの設定をしていないので説明通りに実行するとエラーになる
+    - socket.io-clientによるコネクションを複数個所で行っているため、サーバ側と複数セッションを持ってしまう。
 - [Github : React Getting Started](https://facebook.github.io/react/docs/getting-started-ja-JP.html)
 - [Full-Stack Redux Tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)
 - [Real time data flow with Redux and Socket.io](http://spraso.com/real-time-data-flow-with-redux-and-socket-io/)

@@ -13,6 +13,7 @@ class CommentBox extends Component {
   componentWillMount() {
     const {actions} = this.props;
     socket.on('recieve comments', function(comments) {
+      console.log('[components][socket.id]', socket.id);
       actions.recieveComments(comments);
     });
   }
