@@ -3,10 +3,11 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import * as reducers from '../reducers/index';
+import {chatMiddleware} from '../chat';
 
 // createStore時に、Middlewareが実装されるように拡張
-// ここでは、非同期処理機能のthunkMiddlewareを指定
-let createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+// ここでは、非同期処理機能のthunkMiddlewareと独自のchatMiddlewareを指定
+let createStoreWithMiddleware = applyMiddleware(thunkMiddleware,chatMiddleware)(createStore);
 // reducerをまとめる
 const rootReducer = combineReducers(reducers);
 

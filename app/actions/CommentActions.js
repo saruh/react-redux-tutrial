@@ -1,6 +1,4 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import io from 'socket.io-client';
-export const socket = io('http://localhost:3000');
 
 export function recieveComments(comments) {
   return {
@@ -17,14 +15,7 @@ export function addComment(comment) {
 }
 
 export function searchComments() {
-  return dispatch => {
-    socket.emit('search comments');
-  };
-}
-
-export function createComment(comment) {
-  console.log('[action][socket.id]', socket.id);
-  return dispatch => {
-    socket.emit('create comment', comment);
+  return {
+    type: ActionTypes.SEARCH_COMMENT
   };
 }

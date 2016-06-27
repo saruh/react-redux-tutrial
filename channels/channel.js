@@ -12,11 +12,8 @@ var channel = function(io) {
 
     socket.on('search comments', function(){
       fs.readFile('db/comments.json', function(err, data) {
-        // componentsとactionsで別のセッションを張ってしまっている場合
-        // 異なるセッションに通知(socket.emit)しても意味がないため、
-        // ここでは、一旦繋がっているセッションの全てに通知を行う。
-        //socket.emit('recieve comments', JSON.parse(data));
-        socket.broadcast.emit('recieve comments', JSON.parse(data));
+        console.log('search comments', JSON.parse(data));
+        socket.emit('recieve comments', JSON.parse(data));
       });
     });
 
@@ -25,22 +22,12 @@ var channel = function(io) {
         var comments = JSON.parse(data);
         comments.push(comment);
         fs.writeFile('db/comments.json', JSON.stringify(comments, null, 4), function(err) {
-          // componentsとactionsで別のセッションを張ってしまっている場合
-          // 異なるセッションに通知(socket.emit)しても意味がないため、
-          // ここでは、一旦繋がっているセッションの全てに通知を行う。
-          //socket.emit('recieve comments', comments);
+          console.log('create comment', comments);
           socket.broadcast.emit('recieve comments', comments);
         });
       });
     });
-/*
-    // 無駄に通知しないでも本来は良いはず。
-    setInterval(function(){
-      fs.readFile('db/comments.json', function(err, data) {
-        socket.emit('recieve comments', JSON.parse(data));
-      });
-    }, 2000);
-*/
+
   })
 };
 
