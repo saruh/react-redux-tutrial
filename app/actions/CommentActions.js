@@ -1,34 +1,11 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import $ from 'jquery';
+import io from 'socket.io-client';
+export const socket = io('http://localhost:3000');
 
 export function recieveComments(comments) {
   return {
     type: ActionTypes.RECEIVE_COMMENTS,
     comments
-  };
-}
-
-export function searchComments() {
-  return dispatch => {
-    let promise = new Promise((resolve, reject) => {
-      $.ajax({
-        url: '/api/comments',
-        dataType: 'json',
-        cache: false,
-        success(data) {
-          resolve(data);
-        },
-        error(xhr, status, err) {
-          reject(err);
-        }
-      });
-    });
-
-    promise.then((data) => {
-      dispatch(recieveComments(data));
-    }).catch((err) => {
-      console.error(err);
-    });
   };
 }
 
@@ -39,30 +16,14 @@ export function addComment(comment) {
   };
 }
 
+export function searchComments() {
+  return dispatch => {
+    socket.emit('search comments');
+  };
+}
+
 export function createComment(comment) {
   return dispatch => {
-    // 先にクライアント側だけでstateを更新
-    dispatch(addComment(comment));
-    let promise = new Promise((resolve, reject) => {
-      $.ajax({
-        url: '/api/comments',
-        dataType: 'json',
-        type: 'POST',
-        data: comment,
-        success(data) {
-          resolve(data);
-        },
-        error(xhr, status, err) {
-          reject(err);
-        }
-      });
-    });
-
-    promise.then((data) => {
-      // 再度サーバからのレスポンスで更新し直す
-      dispatch(recieveComments(data));
-    }).catch((err) => {
-      console.error(err);
-    });
+    socket.emit('create comment', comment);
   };
 }

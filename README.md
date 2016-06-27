@@ -1,5 +1,8 @@
-[参考](http://qiita.com/ogomr/items/493e10c424e9d6bd2028)
-[参考](https://facebook.github.io/react/docs/getting-started-ja-JP.html)
+## 参考
+- [Qiita : React Tutorial Example](http://qiita.com/ogomr/items/493e10c424e9d6bd2028)
+- [Github : React Getting Started](https://facebook.github.io/react/docs/getting-started-ja-JP.html)
+- [Full-Stack Redux Tutorial](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)
+- [Real time data flow with Redux and Socket.io](http://spraso.com/real-time-data-flow-with-redux-and-socket-io/)
 
 ## エラー発生
 - React Tutorial 20 : コメントの書き込み
@@ -55,6 +58,7 @@ block content
 - Reactの独自仕様
     - [getInitialState](http://js.studio-kingdom.com/react/component_specs/get_initial_state)
     - [componentDidMount](http://js.studio-kingdom.com/react/component_lifecycle/mounting_componentdidmount)
+    - [componentWillMount](http://js.studio-kingdom.com/react/component_lifecycle/mounting_componentwillmount)
 - Reduxの構成
     - actions
         - API通信やビジネスロジックなどのロジックを配置
